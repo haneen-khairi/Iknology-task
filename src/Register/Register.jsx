@@ -1,8 +1,17 @@
-import { Link } from 'react-router-dom';
-import {useState} from "react"
-import { TextField, Button, Typography, IconButton, InputAdornment, Container, Paper } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { useForm, Controller } from 'react-hook-form';
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import {
+  TextField,
+  Button,
+  Typography,
+  IconButton,
+  InputAdornment,
+  Container,
+  Paper,
+  InputLabel,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useForm, Controller } from "react-hook-form";
 
 const Register = () => {
   const {
@@ -11,10 +20,10 @@ const Register = () => {
     formState: { errors },
     watch,
   } = useForm({
-    mode: "onChange"
+    mode: "onChange",
   });
 
-  const watchPassword = watch('password', '');
+  const watchPassword = watch("password", "");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const handleTogglePasswordVisibility = () => {
@@ -25,26 +34,51 @@ const Register = () => {
   };
 
   const onSubmit = (data) => {
-    console.log('Registration successful');
-    console.log('=== data ===', data);
+    console.log("Registration successful");
+    console.log("=== data ===", data);
   };
 
   return (
     <Container maxWidth="xs">
-      <Paper elevation={3} style={{ padding: '20px', marginTop: '20px', boxShadow: '0px 0px 10px rgba(0,0,0,0.2)' }}>
+      <Paper
+        elevation={3}
+        style={{
+          padding: "20px",
+          marginTop: "20px",
+          boxShadow: "0px 0px 10px rgba(0,0,0,0.2)",
+        }}
+      >
         <div>
-          <Typography variant="h4">Register</Typography>
+          <Typography
+            variant="h4"
+            style={{
+              marginBottom: "20px",
+            }}
+          >
+            Register
+          </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
+            <InputLabel
+              htmlFor="email"
+              style={{
+                textAlign: "left",
+                color: "#181818",
+              }}
+            >
+              Email address
+            </InputLabel>
             <Controller
               name="email"
               control={control}
               defaultValue=""
-              rules={{ required: 'Email is required', pattern: /^\S+@\S+\.\S+$/ || 'Invalid email' }}
+              rules={{
+                required: "Email is required",
+                pattern: /^\S+@\S+\.\S+$/ || "Invalid email",
+              }}
               render={({ field }) => (
                 <TextField
                   margin="normal"
-                  label="Email"
-                  variant="filled"
+                  className="input-style"
                   fullWidth
                   error={Boolean(errors.email)}
                   helperText={errors.email?.message}
@@ -52,17 +86,31 @@ const Register = () => {
                 />
               )}
             />
+            <InputLabel
+              htmlFor="email"
+              style={{
+                textAlign: "left",
+                color: "#181818",
+              }}
+            >
+              Password 
+            </InputLabel>
             <Controller
               name="password"
               control={control}
               defaultValue=""
-              rules={{ required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } }}
+              rules={{
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              }}
               render={({ field }) => (
                 <TextField
+                  className="input-style"
                   margin="normal"
-                  label="Password"
-                  variant="filled"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   fullWidth
                   error={Boolean(errors.password)}
                   helperText={errors.password?.message}
@@ -79,27 +127,42 @@ const Register = () => {
                 />
               )}
             />
+             <InputLabel
+              htmlFor="email"
+              style={{
+                textAlign: "left",
+                color: "#181818",
+              }}
+            >
+              Confirm password 
+            </InputLabel>
             <Controller
               name="confirmPassword"
               control={control}
               defaultValue=""
               rules={{
-                validate: (value) => value === watchPassword || 'Passwords do not match',
+                validate: (value) =>
+                  value === watchPassword || "Passwords do not match",
               }}
               render={({ field }) => (
                 <TextField
-                  margin="normal"
-                  label="Confirm Password"
-                  variant="filled"
-                  type={showConfirmPassword ? 'text' : 'password'}
+                className="input-style"
+                  margin="normal" 
+                  type={showConfirmPassword ? "text" : "password"}
                   fullWidth
                   error={Boolean(errors.confirmPassword)}
                   helperText={errors.confirmPassword?.message}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <IconButton onClick={handleToggleConfirmPasswordVisibility}>
-                          {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                        <IconButton
+                          onClick={handleToggleConfirmPasswordVisibility}
+                        >
+                          {showConfirmPassword ? (
+                            <Visibility />
+                          ) : (
+                            <VisibilityOff />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),
@@ -108,11 +171,13 @@ const Register = () => {
                 />
               )}
             />
-            <Button fullWidth variant="contained" color="primary" type="submit">
+            <Button fullWidth variant="contained" color="primary" type="submit" className="btn-prime">
               Submit
             </Button>
           </form>
-          <p>{`Already have an account?`} <Link to="/">Login</Link></p>
+          <p>
+            {`Already have an account?`} <Link to="/">Login</Link>
+          </p>
         </div>
       </Paper>
     </Container>
