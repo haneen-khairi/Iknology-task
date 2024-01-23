@@ -38,6 +38,7 @@ const Login = () => {
           padding: "20px",
           marginTop: "20px",
           marginBottom: "20px",
+          boxShadow:'none'
         }}
       >
         <div>

@@ -45,7 +45,8 @@ const Register = () => {
         style={{
           padding: "20px",
           marginTop: "20px",
-          boxShadow: "0px 0px 10px rgba(0,0,0,0.2)",
+          marginBottom: "20px",
+          boxShadow:'none'
         }}
       >
         <div>
